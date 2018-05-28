@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>The Frontendian</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Inconsolata|Karla:400,700" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Karla, Arial, Helvetica, sans-serif;
+      font-size: 6px;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.75;
+    }
+
+    a {
+      color: #4057DF;
+      font-weight: bold;
+      font-style: normal;
+      text-decoration: none;
+    }
+
+    code {
+      font-family: Inconsolata, 'Courier New', Courier, monospace;
+    }
+
+    a,
+    address,
+    div,
+    p {
+      font-size: 3rem;
+    }
+
+    p {
+      margin: 0 0 2rem 0;
+    }
+
+    ol, ul {
+      padding: 0 3rem;
+      list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAALGPC/xhBQAAACtJREFUGBlj/A8EDEQAJiLUgJWwwBQ6RjyAMVHo/SsUwHyiTRwKChmpHo4APj0LDfz+9xwAAAAASUVORK5CYII=);
+    }
+
+    li {
+      margin: 0 0 2rem 0;
+      font-size: 3rem;
+    }
+
+    footer, header, main {
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    @media screen and (max-width: 640px) {
+      footer, header, main {
+        padding: 0 20px;
+      }
+    }
+
+    header {
+      margin-bottom: 10rem;
+      letter-spacing: 1px;
+      text-align: center; 
+    }
+
+    header a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    footer {
+      margin-bottom: 30rem;
+      min-height: 30rem;
+    }
+
+    footer .footer-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      height: 20rem;
+    }
+
+    footer .footer-description {
+      text-align: center;
+    }
+
+    .footer-body {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media screen and (max-width: 640px) {
+      .footer-body {
+        margin-bottom: 10rem;
+        flex-direction: column;
+      }
+    }
+
+    footer .footer-links {
+      flex-basis: 200px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      position: relative;
+      margin: 4rem 0;
+      color: #333;
+      font-family: Cardo, 'Times New Roman', Times, serif;
+      font-weight: bold;
+      line-height: 1.25;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -2rem;
+      left: 0;
+      width: 100%;
+      max-width: 200px;
+      height: 2px;
+      background-color: #F7D869;
+    }
+
+    h1 {
+      font-size: 6rem;
+      margin: 6rem 0;
+    }
+
+    h2 {
+      font-size: 5rem;
+    }
+
+    h3 {
+      font-size: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <header><a href="/"><h3>the frontendian</h3></a></header>
+  <main>{{ content }}</main>
+  <footer>
+    <div class="footer-divider">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" xml:space="preserve" width="16" height="16">
+        <g class="nc-icon-wrapper" fill="#111111">
+          <line x1="10.5" y1="1.5" x2="5.5" y2="14.5" fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round" data-cap="butt" data-color="color-2"/> 
+          <polyline points="3.5 4.5 0.5 7.5 3.5 10.5" fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round" data-cap="butt"/> 
+          <polyline points="12.5 4.5 15.5 7.5 12.5 10.5" fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round" data-cap="butt"/>
+        </g>
+      </svg>
+    </div>
+    <div class="footer-body">
+      <div class="footer-description">
+        <p>The Frontendian is a little blog about building web applications. Posts arrive weekly on performance, security, accessibility, tooling, and more.</p>
+        <p>Made with ☕ in Seattle.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
