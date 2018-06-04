@@ -23,13 +23,13 @@
 
   {% if page.ogShareImage %}
   <meta property="og:image" content="{{ site.url }}{{ page.ogShareImage }}" />
-  {% elseif %}
+  {% else %}
   <meta property="og:image" content="{{ site.url }}/public/img/generic_share.png" />
   {% endif %}
 
   {% if page.excerpt %}
   <meta property="og:description" content="{{ page.excerpt | remove: '<p>' | remove: '</p>' }}" />
-  {% elseif %}
+  {% else %}
   <meta property="og:description" content="The Frontendian is a little blog about building web applications. Posts arrive weekly on performance, security, accessibility, tooling, and more." />
   {% endif %}
 
