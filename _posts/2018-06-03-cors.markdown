@@ -91,7 +91,7 @@ There are a few additional nuances to preflight requests, and to better understa
 
 ### Understanding Simple Requests
 
-If there's one thing I'd wish I'd known about CORS sooner, it's how it handles _simple requests_. Think of simple requests as any request a `<form>` element might be able to initiate. Why is this distinction important? Well, prior to CORS, the only requests a webpage could send originated from `<form>` elements. Thus, since such requests have been permissible pre-CORS, the specification doesn't require that the browser
+If there's one thing I'd wish I'd known about CORS sooner, it's how it handles _simple requests_. Think of simple requests as any request a `<form>` element might be able to initiate. Why is this distinction important? Well, prior to CORS, the only requests a webpage could send originated from `<form>` elements. Thus, since such requests have been permissible pre-CORS, the specification doesn't require that the browser perform preflight requests for them.
 
 Technically defined, however, simple requests are the combination of a [_simple method_](https://www.w3.org/TR/cors/#simple-method){:target="_blank"} with a [_simple header_](https://www.w3.org/TR/cors/#simple-header){:target="_blank"}.
 
