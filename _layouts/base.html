@@ -14,6 +14,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Inconsolata|Karla:400,700" rel="stylesheet">
 
+  <!-- Open Graph -->
+  {% if page.title %}
+  <meta property="og:title" content="{{ page.title }}" />
+  {% endif %}
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+  {% if page.ogShareImage %}
+  <meta property="og:image" content="{{ site.url }}{{ page.ogShareImage }}" />
+  {% endif %}
+  {% if page.excerpt %}
+  <meta property="og:description" content="{{ page.excerpt | remove: '<p>' | remove: '</p>' }}" />
+  {% endif %}
+
+  <!-- Syntax Highlighting -->
+
   {% if page.syntaxHighlighting %}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
   {% endif %}

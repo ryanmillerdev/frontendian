@@ -5,7 +5,6 @@ date:   2018-05-28 07:50:24 -0700
 categories: performance
 hero: /public/svg/carriage-outline.svg
 comments: true
-excerpt: <p>Few users of the modern internet realize that a webpage isn't a single "thing" but a composition of scripts, stylesheets, HTML, and more. To an end user, a website is a website, though some are certainly slower than others, and some keep lagging even after the page has loaded.</p>
 ---
 Few users of the modern internet realize that a webpage isn't a single "thing" but a composition of scripts, stylesheets, HTML, and more. To an end user, a website is a website, though some are certainly slower than others, and some keep lagging even after the page has loaded. Much of what can be interpreted as a website's performance can be reduced to how quickly its various resources are obtained, and as users become accustomed to meticulously tuned web applications by the likes of Google and Facebook, it's important for every frontend developer to understand how to optimize their site's resource requests.
 

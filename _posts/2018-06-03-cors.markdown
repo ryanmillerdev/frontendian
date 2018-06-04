@@ -1,13 +1,13 @@
 ---
 layout: post
 title:  "CORS"
-date:   2018-06-01 08:00:00 -0700
+date:   2018-06-03 08:00:00 -0700
 categories: security
 hero: /public/svg/sailor-outline.svg
+ogShareImage: /public/img/cors_og_image.png
 permalink: /cors
 comments: true
 syntaxHighlighting: ['http']
-excerpt: <p>CORS (Cross-Origin Resource Sharing) is subject tinged with dread for many web developers. Like tales of a mythical sea beast, every developer has a story to tell about the day CORS seized upon one of their web requests, dragging it down into the inexorable depths, never to be seen again.</p>
 ---
 CORS (Cross-Origin Resource Sharing) is subject tinged with dread for many web developers. Like tales of a mythical sea beast, every developer has a story to tell about the day CORS seized upon one of their web requests, dragging it down into the inexorable depths, never to be seen again. 
 
@@ -153,9 +153,9 @@ With our quick surveys of preflight and simple requests complete, it's useful to
 
 ### Conclusion
 
-We covered a great deal of territory quickly, and I hope this post has given you a better perspective on the motivations behind the CORS spec. I've included a couple extra bits of content below: a CORS headers reference, as well as a short list of links that were useful to me as I put together this post. If you've spotted an error, be it factual or syntactical, let me know if in the comments below!
+We covered a great deal of territory quickly, and I hope this post has given you a better perspective on the motivations behind the CORS spec. There are still a few topics I didn't get to here, such as how you can cache preflight responses with the `Access-Control-Max-Age` header. In the meanwhile, I've included a short list of links that were useful to me as I put together this post, and if you've spotted an error, be it factual or syntactical, let me know in the comments below!
 
-### CORS Headers: A Bestiary
+<!-- ### CORS Headers: A Bestiary
 
 `Access-Control-Allow-Origin` is a _response_ header, and designates which domain a response is deliverable to (but only one). Note that supplying a wildcard (`*`) value here will allow any domain to receive the response. This header is checked both during "preflighting" and after a successful response is received.
 
@@ -169,12 +169,14 @@ We covered a great deal of territory quickly, and I hope this post has given you
 
 `Access-Control-Max-Age` is a _response header_, and lets the browser know that requests which match the request for which the response was supplied won't need preflights for a certain period of seconds.
 
-`Access-Control-Expose-Headers` is a _response header_, and instructs the browser which headers should be inaccessible to JavaScript on the response as delivered. Can accompany otherwise successful responses.
+`Access-Control-Expose-Headers` is a _response header_, and instructs the browser which headers should be inaccessible to JavaScript on the response as delivered. Can accompany otherwise successful responses. -->
 
 ### References & Links
 
-[MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) 
+[MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS){:target="_blank"} 
 
-[W3C CORS Specification](https://www.w3.org/TR/cors/)
+[W3C CORS Specification](https://www.w3.org/TR/cors/){:target="_blank"}
 
-[W3C Fetch Specification - CORS Section](https://fetch.spec.whatwg.org/#http-cors-protocol)
+[W3C Fetch Specification - CORS Section](https://fetch.spec.whatwg.org/#http-cors-protocol){:target="_blank"}
+
+[Wonderful Stack Overflow Thread](https://stackoverflow.com/questions/15381105/cors-what-is-the-motivation-behind-introducing-preflight-requests){:target="_blank"}
