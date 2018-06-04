@@ -4,8 +4,10 @@ title:  "CORS"
 date:   2018-06-01 08:00:00 -0700
 categories: security
 hero: /public/svg/sailor-outline.svg
+permalink: /cors
 comments: true
 syntaxHighlighting: ['http']
+excerpt: <p>CORS (Cross-Origin Resource Sharing) is subject tinged with dread for many web developers. Like tales of a mythical sea beast, every developer has a story to tell about the day CORS seized upon one of their web requests, dragging it down into the inexorable depths, never to be seen again.</p>
 ---
 CORS (Cross-Origin Resource Sharing) is subject tinged with dread for many web developers. Like tales of a mythical sea beast, every developer has a story to tell about the day CORS seized upon one of their web requests, dragging it down into the inexorable depths, never to be seen again. 
 
@@ -14,15 +16,15 @@ CORS (Cross-Origin Resource Sharing) is subject tinged with dread for many web d
   <figcaption>"No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'https://example.com' is therefore not allowed access."</figcaption>
 </figure>
 
-Whether it's fetching a bit of JSON, or attempting to configure a CDN for your media assets, CORS seems to make itself a bother at all the wrong times. And so developers have learned to placate CORS, allowing it to garner a repuation as nuisance that, one way or another, makes our users more secure.
+Whether it's fetching a bit of JSON, or attempting to configure a CDN for your media assets, CORS seems to make itself a bother at all the wrong times. And so developers have learned to placate CORS, allowing it to garner a reputation as nuisance that, somehow, makes our users more secure.
 
 This post aims to demystify CORS and show it's lighter side–as a specification that didn't set out to hamper the aspirations of web developers everywhere, but instead to loose us from the grip of the _same-origin policy_. We'll go through each of the headers necessary to properly satisfy CORS constraints, and also discuss a couple places where CORS is now relevant but which may surprise you.
 
 ### A Brief History of CORS
 
-CORS, or the idea that was to become CORS, was born in [the Web 2.0 era](https://www.oreilly.com/pub/a/web2/archive/what-is-web-20.html?){:target="_blank"}, circa 2005. One of the premier Web 2.0 buzzwords was [AJAX](http://adaptivepath.org/ideas/ajax-new-approach-web-applications/){:target="_blank"}, or "Asyncronous JavaScript and XML", and it captured the idea that you could use the [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest){:target="_blank"} API to asyncronously update a webpage without a full refresh. 
+CORS, or the idea that was to become CORS, was born in [the Web 2.0 era](https://www.oreilly.com/pub/a/web2/archive/what-is-web-20.html?){:target="_blank"}, circa 2005. One of the premier Web 2.0 buzzwords was [AJAX](http://adaptivepath.org/ideas/ajax-new-approach-web-applications/){:target="_blank"}, or "Asynchronous JavaScript and XML", and it captured the idea that you could use the [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest){:target="_blank"} API to asynchronously update a webpage without a full refresh. 
 
-Yet when XMLHttpRequest first arrived on the scene it had a significant limitation: you could only use its API to communicate with services which were on the same origin as the requesting site. That meant if your site lived on `https://iloveajax.com`, and you wanted to make a request to `https://externalresource.com` (or even `https://subdomain.iloverajax.com`) the browser would simply refuse to initiate the request. This is called the [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy){:target="_blank"}.
+Yet when XMLHttpRequest first arrived on the scene it had a significant limitation: you could only use its API to communicate with services which were on the same domain as the requesting site. That meant if your site lived on `https://iloveajax.com`, and you wanted to make a request to `https://externalresource.com` (or even `https://subdomain.iloverajax.com`) the browser would simply refuse to initiate the request. This is called the [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy){:target="_blank"}.
 
 As AJAX picked up steam it became apparent that something had to be done about XMLHttpRequest and its same-origin straightjacket. The web development community saw how opening up AJAX to other domains could give rise to new services and ways to use the web, which (spoiler alert) it did in the likes of Firebase, Mixpanel, New Relic, and more. At about this same time (2005) people began to cheat the system using something called [JSONP](https://en.wikipedia.org/wiki/JSONP){:target="_blank"}, which essentially hijacked the `<script>` tag (and its rather lax resource security policy) to query data from remote services. 
 
@@ -32,15 +34,15 @@ Writing specifications is no easy task, but you wouldn't be blamed for asking wh
 
 So the decision was made to make CORS opt-in, meaning that browsers would continue to enforce the same-origin policy unless given a specific series of signals by a web service that it was permissible to serve content to different origins. We'll discuss the specifics of this mechanism, called _preflighting_, in just a bit. By building this opt-in feature into the design of CORS it meant that web services wouldn't need to service a torrent of unexpected requests, and web developers could start building new breeds of services and tools.
 
-You may never warm to CORS, but if there's one thing for which we should all have a little gratitude, it's the fact that CORS balances both backwards-compatibility and the opening of a huge swath of new functionality to web developers. Not an easy feat! And to better demonstrate the accomplishment that it is, let's dig into how you can use CORS and avoid some of its subtler gotchas. 
+You may never warm to CORS, but if there's one thing for which we should all have a little gratitude, it's the fact that CORS balances both backwards-compatibility and the opening of a huge swath of new functionality to web developers. Not an easy feat! And to better demonstrate the accomplishment that it is, let's dig into how CORS might affect your web requests and how you can avoid some of its subtler gotchas. 
 
 <figure>
-  <img src="/public/svg/whale-outline.svg" width="100%" style="max-width: 50rem"/>
+  <img src="/public/svg/seagull-outline.svg" width="100%" style="max-width: 30rem"/>
 </figure>
 
 ### Preflighting
 
-Probably the most baffling aspect of CORS is its usage of _preflighting_ requests. Imagine you initiated the following cross-domain request to POST an update to a user's profile with a modern browser:
+Probably the most baffling aspect of CORS is its usage of _preflight_ requests. Imagine you initiated the following cross-domain request to POST an update to a user's profile:
 
 <pre><code>POST https://api.users.com/me HTTP/1.1
 Host: example.com
@@ -51,7 +53,7 @@ Content-Type: application/json; charset=utf-8
   "description": "I'm a demo user!"
 }</code></pre>
 
-Upon initiating your POST request, you'd see the browser following request first:
+If you initiated this request in a browser that implements CORS, you'd see the browser send the following request first:
 
 <pre><code>OPTIONS https://api.users.com/me HTTP/1.1
 Host: example.com
@@ -59,41 +61,47 @@ Access-Control-Request-Headers: content-type
 Access-Control-Request-Method: POST
 Origin: https://example.com</code></pre>
 
-Let's pause here for a moment. What's going on? This first `OPTIONS` request is called a preflight request, and it's the concrete implementation of the CORS opt-in mechanism at work, as was mentioned just above. Beyond requests that a `<form>` element might make, which are called "simple requests" and will be discussed in the next section, the CORS specification requires that browsers check with servers before making requests.
+Let's pause here for a moment. What's going on? This first `OPTIONS` request is called a preflight request, and it's the concrete implementation of the CORS opt-in mechanism at work, as was just mentioned above. Beyond requests that a `<form>` element might make, which are called "simple requests" and will be discussed in the next section, the CORS specification requires that browsers check with servers before making cross-origin requests.
 
-What does a response to a preflight request look like? If our endpoint isn't familiar with CORS, it might return a status code like `404` or `503`, which would result in the browser showing an error in the console and stifling the request.
+What does a response to a preflight request look like? If our endpoint isn't familiar with CORS, it might return a status code like `404` or `501`, which would result in the browser immediately stifling the request.
 
 If the server does support CORS, but doesn't allow requests from our domain, we might see something like:
 
 <pre><code>OPTIONS https://api.users.com/me HTTP/1.1
 Status: 200
-Access-Control-Allow Origin: https://notyourdomain.com</code></pre> 
+Access-Control-Allow-Origin: https://notyourdomain.com
+Access-Control-Allow-Method: POST</code></pre> 
 
-This response tells the browser that this endpoint is only to be accessed by `https://notyourdomain.com`, and that it doesn't want to allow `https://example.com` to interact with it. The browser would obey and terminate your request.
+This response tells the browser that this endpoint is only to be accessed by `https://notyourdomain.com`, and that it doesn't want to allow any other domain to interact with it. The browser would obey and terminate your request.
 
 If the server does support CORS and doesn't care who interacts with the endpoint in question, we'd likely see:
 
 <pre><code>OPTIONS https://api.users.com HTTP/1.1
 Status: 200
-Access-Control-Allow Origin: *</code></pre> 
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Method: POST</code></pre> 
 
-The asterisk (`*`) character means that the endpoint wants to allow any domain to access the endpoint, and that the browser should allow the actual request, namely our request to update the user profile, to proceeed.
+The asterisk (`*`) character means that the endpoint wants to allow any domain to access the endpoint, and that the browser should allow the actual request, namely our request to update the user profile, to proceed.
 
-There are a few additional nuances to preflight request, but before we get to them, let's take a moment to understand simple requests and why they aren't subject to preflighting.
+There are a few additional nuances to preflight requests, and to better understand them, let's take a moment to understand simple requests and why they aren't subject to preflighting.
+
+<figure>
+  <img src="/public/svg/whale-outline.svg" width="100%" style="max-width: 50rem"/>
+</figure>
 
 ### Understanding Simple Requests
 
-If there's one thing I'd wish I'd known about CORS sooner, it's how it handles _simple requests_. Think of simple requests as any request a `<form>` element might be able to initiate. Why is this distinction important? Well, prior to CORS, the only requests a webpage could initiate originated from `<form>` elements. Thus, since such requests have been permissible pre-CORS, the specification doesn't require that the browser
+If there's one thing I'd wish I'd known about CORS sooner, it's how it handles _simple requests_. Think of simple requests as any request a `<form>` element might be able to initiate. Why is this distinction important? Well, prior to CORS, the only requests a webpage could send originated from `<form>` elements. Thus, since such requests have been permissible pre-CORS, the specification doesn't require that the browser
 
-Technically defined, however, simple requests are the combination of a _simple method_ with a _simple header_.
+Technically defined, however, simple requests are the combination of a [_simple method_](https://www.w3.org/TR/cors/#simple-method){:target="_blank"} with a [_simple header_](https://www.w3.org/TR/cors/#simple-header){:target="_blank"}.
 
-The __simple methods__ are `GET` and `POST`. Easy enough to remember.
+The __simple methods__ are `GET`, `HEAD`, and `POST`. Easy enough to remember.
 
 The __simple headers__ are `Accept`, `Accept-Language`, `Content-Language`, or (and this is important) `Content-Type` __if__ `Content-Type` possesses any of three values: `application/x-www-form-urlencoded`, `multipart/form-data`, or `text/plain`.
 
-Why would the usage of those three magical `Content-Type` values make the header a simple header. The answer has to do with HTML `<form>` elements and the three types of content encodings (MIME types) they are allowed to submit. Check out [this article](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/enctype) on MDN to learn more. The CORS writers felt it wasn't necessary to gate these requests since forms had already been in existence for several years, and servers would likely be aware such client-side requests were possible.
+Why would the usage of those three magical `Content-Type` values make the header a simple header? The answer has to do with HTML `<form>` elements and the three types of content encodings (MIME types) they are allowed to submit. Check out [this article](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/enctype) on MDN to learn more. The CORS writers felt it wasn't necessary to gate these requests since forms had already been in existence for several years, and servers would likely be aware such client-side requests were possible.
 
-To help crystallize this disctinction, here are a couple simple requests as described above:
+To help crystallize this distinction, here are a couple simple requests as described above:
 
 <pre><code class="http">GET https://api.users.com/user/1 HTTP/1.1</code></pre>
 
@@ -116,9 +124,38 @@ Content-Type: application/json
   "description": "I'm a demo user!"
 }</code></pre>
 
-In both of these cases, though we're using simple methods, the addition of headers that fall outside the definition of "simple headers" result in a preflight request being issued.
+In both of these cases, though we're using simple methods, the addition of headers that fall outside the definition of "simple headers" result in a preflight request being issued. These requests can only be sent if the preflight response contains a `Allow-Access-Allow-Headers` header that cites the non-simple header as allowed, e.g.:
 
-### Appendix – CORS Headers 
+<pre><code>OPTIONS https://api.users.com HTTP/1.1
+Status: 200
+Access-Control-Allow-Headers: Content-Type
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Method: POST</code></pre> 
+
+Understanding simple requests will hopefully shed some light on why certain requests seem to pass by CORS strictures unharmed while others are blocked. The addition of a single header, or usage of an alternative method, is enough to cause CORS to engage and scuttle your request.
+
+A final note: just because a request is a simple request does not mean it has wholly escaped CORS. It only means that the browser may initiate the actual request straight away versus performing a preflight. If the response to a simple request contains an `Access-Control-Allow-Origin` that does not include the domain that made the request, or supplies false for `Access-Control-Allow-Credentials` (explained in a moment) when credentials were in fact used, the response can still be stifled, even though it completed. The result of the response is discarded and is never made visible to the requesting JavaScript.
+
+<figure>
+  <img src="/public/svg/tail-outline.svg" width="100%" style="max-width: 30rem"/>
+</figure>
+
+### Portable CORS
+
+With our quick surveys of preflight and simple requests complete, it's useful to know where else you might find CORS beyond the `XMLHttpRequest` or `fetch` APIs. There are two additional specifications which oblige certain requests to implement CORS procedeures:
+
+- CSS3 requires all font requests [to ensure CORS is enforced](https://www.w3.org/TR/css-fonts-3/#same-origin-restriction){:target="_blank"}.
+- WebGL requires all texture requests [to ensure CORS is enforced](https://www.khronos.org/registry/webgl/specs/latest/1.0/#4.2){:target="_blank"}
+
+<figure>
+  <img src="/public/svg/lighthouse-outline.svg" width="100%" style="max-height: 30rem"/>
+</figure>
+
+### Conclusion
+
+We covered a great deal of territory quickly, and I hope this post has given you a better perspective on the motivations behind the CORS spec. I've included a couple extra bits of content below: a CORS headers reference, as well as a short list of links that were useful to me as I put together this post. If you've spotted an error, be it factual or syntactical, let me know if in the comments below!
+
+### CORS Headers: A Bestiary
 
 `Access-Control-Allow-Origin` is a _response_ header, and designates which domain a response is deliverable to (but only one). Note that supplying a wildcard (`*`) value here will allow any domain to receive the response. This header is checked both during "preflighting" and after a successful response is received.
 
@@ -126,7 +163,7 @@ In both of these cases, though we're using simple methods, the addition of heade
 
 `Access-Control-Allow-Headers` is a _response header_, and specifies which headers (beyond the "simple headers", to be discussed shortly) a request is allowed to include. This header is only applicable during "preflighting".
 
-`Access-Controll-Allow-Methods` is a _response header_, and specifies the methods the request is allowed to use. This header is applicable during "preflighting".
+`Access-Control-Allow-Methods` is a _response header_, and specifies the methods the request is allowed to use. This header is applicable during "preflighting".
 
 `Access-Control-Allow-Credentials` is a _response header_, and specifies whether a request is allowed to include a user's credentials (cookies, HTTP authentication, or ["client-side SSL certificates"](https://www.w3.org/TR/cors/#user-credentials)). This header is checked both during "preflighting" and after a successful response is received.
 
@@ -134,11 +171,10 @@ In both of these cases, though we're using simple methods, the addition of heade
 
 `Access-Control-Expose-Headers` is a _response header_, and instructs the browser which headers should be inaccessible to JavaScript on the response as delivered. Can accompany otherwise successful responses.
 
-### Appendix – Helpful Links
+### References & Links
 
 [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) 
 
 [W3C CORS Specification](https://www.w3.org/TR/cors/)
 
 [W3C Fetch Specification - CORS Section](https://fetch.spec.whatwg.org/#http-cors-protocol)
-
