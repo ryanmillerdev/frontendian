@@ -124,7 +124,7 @@ Content-Type: application/json
   "description": "I'm a demo user!"
 }</code></pre>
 
-In both of these cases, though we're using simple methods, the addition of headers that fall outside the definition of "simple headers" result in a preflight request being issued. These requests can only be sent if the preflight response contains a `Allow-Access-Allow-Headers` header that cites the non-simple header as allowed, e.g.:
+In both of these cases, though we're using simple methods, the addition of headers that fall outside the definition of "simple headers" result in a preflight request being issued. These requests can only be sent if the preflight response contains an `Access-Control-Allow-Headers` header that cites the non-simple header as allowed, e.g.:
 
 <pre><code>OPTIONS https://api.users.com HTTP/1.1
 Status: 200
@@ -134,7 +134,7 @@ Access-Control-Allow-Method: POST</code></pre>
 
 Understanding simple requests will hopefully shed some light on why certain requests seem to pass by CORS strictures unharmed while others are blocked. The addition of a single header, or usage of an alternative method, is enough to cause CORS to engage and scuttle your request.
 
-A final note: just because a request is a simple request does not mean it has wholly escaped CORS. It only means that the browser may initiate the actual request straight away versus performing a preflight. If the response to a simple request contains an `Access-Control-Allow-Origin` that does not include the domain that made the request, or supplies false for `Access-Control-Allow-Credentials` (explained in a moment) when credentials were in fact used, the response can still be stifled, even though it completed. The result of the response is discarded and is never made visible to the requesting JavaScript.
+A final note: just because a request is a simple request does not mean it has wholly escaped CORS. It only means that the browser may initiate the actual request straight away versus performing a preflight. If the response to a simple request contains an `Access-Control-Allow-Origin` that does not include the domain that made the request, or supplies false for `Access-Control-Allow-Credentials` when credentials were in fact used, the response can still be stifled, even though it completed. The result of the response is discarded and is never made visible to the requesting JavaScript.
 
 <figure>
   <img src="/public/svg/tail-outline.svg" width="100%" style="max-width: 30rem"/>
