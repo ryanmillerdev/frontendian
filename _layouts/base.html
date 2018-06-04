@@ -18,13 +18,21 @@
   {% if page.title %}
   <meta property="og:title" content="{{ page.title }}" />
   {% endif %}
+
   <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+
   {% if page.ogShareImage %}
   <meta property="og:image" content="{{ site.url }}{{ page.ogShareImage }}" />
+  {% elseif %}
+  <meta property="og:image" content="{{ site.url }}/public/img/generic_share.png" />
   {% endif %}
+
   {% if page.excerpt %}
   <meta property="og:description" content="{{ page.excerpt | remove: '<p>' | remove: '</p>' }}" />
+  {% elseif %}
+  <meta property="og:description" content="The Frontendian is a little blog about building web applications. Posts arrive weekly on performance, security, accessibility, tooling, and more." />
   {% endif %}
+
   <meta property="og:type" content="website" />
 
   <!-- Syntax Highlighting -->
