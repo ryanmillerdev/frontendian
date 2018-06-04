@@ -10,9 +10,13 @@
   </script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>The Frontendian</title>
+  <title>the frontendian</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Inconsolata|Karla:400,700" rel="stylesheet">
+
+  {% if page.syntaxHighlighting %}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  {% endif %}
 
   <!-- Favicons -->
 
@@ -24,6 +28,10 @@
   <!-- Styling -->
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
@@ -44,11 +52,24 @@
       font-family: Inconsolata, 'Courier New', Courier, monospace;
     }
 
-    a,
-    address,
-    div,
-    p {
+    a, address, div, p, pre, code {
       font-size: 3rem;
+    }
+
+    figure {
+      margin: 8rem 0;
+      text-align: center;
+    }
+
+    pre {
+      margin: 6rem 0;
+    }
+
+    figcaption {
+      display: inline-block;
+      margin: 5rem 0 0 0;
+      max-width: 50rem;
+      font-size: 2rem;
     }
 
     p {
@@ -119,6 +140,8 @@
       flex-basis: 200px;
     }
 
+    /* Headers */
+
     h1, h2, h3, h4, h5, h6 {
       position: relative;
       margin: 4rem 0;
@@ -128,16 +151,28 @@
       line-height: 1.25;
     }
 
-    h1::after {
+    h1::after ,
+    h2::after {
       content: '';
       position: absolute;
       bottom: -2rem;
       left: 0;
-      width: 100%;
-      max-width: 200px;
+      width: 200px;
       height: 2px;
       background-color: #F7D869;
     }
+
+    h1.align-middle ,
+    h2.align-middle {
+      text-align: center;
+    }
+
+    h1.align-middle::after,
+    h2.align-middle::after {
+      left: 50%;
+      margin-left: -100px;
+    }
+
 
     h1 {
       font-size: 6rem;
@@ -151,10 +186,55 @@
     h3 {
       font-size: 4rem;
     }
+
+    h4 {
+      font-size: 3.5rem;
+    }
+
+    /* Buttons */
+
+    button {
+      border: 2px solid #F7D869;
+      padding: 2rem 3rem;
+      background-color: #F7D869;
+      border-radius: 5px;
+      color: #333;
+      cursor: pointer;
+      font-family: Karla, Arial, Helvetica, sans-serif;
+      font-size: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Utilities */
+    .mb-0 { margin-bottom: 0 !important; }
+    .mb-1 { margin-bottom: 1rem !important; }
+    .mb-2 { margin-bottom: 2rem !important; }
+    .mb-3 { margin-bottom: 3rem !important; }
+    .ma-4 { margin: 4rem !important; }
+    .mb-4 { margin-bottom: 4rem !important; }
+    .mb-5 { margin-bottom: 5rem !important; }
+    .mb-6 { margin-bottom: 6rem !important; }
+
+    /* Disqus */
+    #disqus_thread {
+      margin: 4rem 0 0 0;
+    }
+
+    /* HighlightJS */
+    .hljs {
+      background-color: #FAFAFA;
+      padding: 6rem;
+    }
   </style>
 </head>
 <body>
-  <header><a href="/"><h3>the frontendian</h3></a></header>
+  <header>
+    <a href="/">
+      <h3>the frontendian</h3>
+    </a>
+  </header>
   <main>{{ content }}</main>
   <footer>
     <div class="footer-divider">
@@ -173,5 +253,31 @@
       </div>
     </div>
   </footer>
+
+  <!-- DISQUS -->
+  {% if page.comments %}
+  <script>
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://the-frontendian.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  {% endif %}
+
+  <!-- SYNTAX HIGHLIGHTING -->
+  {% if page.syntaxHighlighting %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  {% endif %}
+
+  {% for language in page.syntaxHighlighting %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/{{ language }}.min.js"></script>
+  {% endfor %}
+  
+  {% if page.syntaxHighlighting %}
+  <script>hljs.initHighlightingOnLoad();</script>
+  {% endif %}
 </body>
 </html>
