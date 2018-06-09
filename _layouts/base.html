@@ -3,14 +3,14 @@
 <head>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44427723-6"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-44427723-6');
+    // window.dataLayer = window.dataLayer || [];
+    // function gtag(){dataLayer.push(arguments);}
+    // gtag('js', new Date());
+    // gtag('config', 'UA-44427723-6');
   </script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>the frontendian</title>
+  <title>{{ site.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Inconsolata|Karla:400,700" rel="stylesheet">
 
@@ -30,7 +30,7 @@
   {% if page.excerpt %}
   <meta property="og:description" content="{{ page.excerpt | remove: '<p>' | remove: '</p>' }}" />
   {% else %}
-  <meta property="og:description" content="A little blog about building web applications. Posts arrive weekly on performance, security, accessibility, tooling, and more." />
+  <meta property="og:description" content="{{ site.description[site.active_lang] }}" />
   {% endif %}
 
   <meta property="og:type" content="website" />
@@ -129,7 +129,7 @@
     header {
       margin-bottom: 10rem;
       letter-spacing: 1px;
-      text-align: center; 
+      text-align: center;
     }
 
     header a {
@@ -145,7 +145,7 @@
     footer .footer-divider {
       display: flex;
       align-items: center;
-      justify-content: center; 
+      justify-content: center;
       height: 20rem;
     }
 
@@ -261,7 +261,7 @@
 <body>
   <header>
     <a href="/">
-      <h3>the frontendian</h3>
+      <h3>{{ site.title }}</h3>
     </a>
   </header>
   <main>{{ content }}</main>
@@ -269,16 +269,20 @@
     <div class="footer-divider">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" xml:space="preserve" width="16" height="16">
         <g class="nc-icon-wrapper" fill="#111111">
-          <line x1="10.5" y1="1.5" x2="5.5" y2="14.5" fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round" data-cap="butt" data-color="color-2"/> 
-          <polyline points="3.5 4.5 0.5 7.5 3.5 10.5" fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round" data-cap="butt"/> 
+          <line x1="10.5" y1="1.5" x2="5.5" y2="14.5" fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round" data-cap="butt" data-color="color-2"/>
+          <polyline points="3.5 4.5 0.5 7.5 3.5 10.5" fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round" data-cap="butt"/>
           <polyline points="12.5 4.5 15.5 7.5 12.5 10.5" fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round" data-cap="butt"/>
         </g>
       </svg>
     </div>
     <div class="footer-body">
       <div class="footer-description">
-        <p>A little blog about building web applications. Posts arrive weekly on performance, security, accessibility, tooling, and more.</p>
-        <p>Made with ☕ in Seattle by <a href="https://twitter.com/andryanmiller" target="_blank">Ryan Miller</a>.</p>
+        <p>{{ site.description[site.active_lang] }}</p>
+        <p>{{ site.footer.made_with_and_by[site.active_lang] }} <a href="https://twitter.com/andryanmiller" target="_blank">Ryan Miller</a>.</p>
+
+        {% if site.active_lang != site.default_lang %}
+        <p>{{ site.footer.translated_by[site.active_lang] }}</p>
+        {% endif %}
       </div>
     </div>
   </footer>
@@ -304,7 +308,7 @@
   {% for language in page.syntaxHighlighting %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/{{ language }}.min.js"></script>
   {% endfor %}
-  
+
   {% if page.syntaxHighlighting %}
   <script>hljs.initHighlightingOnLoad();</script>
   {% endif %}
