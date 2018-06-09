@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Google Analytics -->
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44427723-6"></script>
   <script>
-    // window.dataLayer = window.dataLayer || [];
-    // function gtag(){dataLayer.push(arguments);}
-    // gtag('js', new Date());
-    // gtag('config', 'UA-44427723-6');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-44427723-6');
   </script>
+
+  <!-- Basic Metadata -->
+
+  <title>the frontendian</title>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description[site.active_lang] }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Inconsolata|Karla:400,700" rel="stylesheet">
 
-  <!-- Open Graph -->
+  <!-- Open Graph Metadata -->
+
   {% if page.title %}
   <meta property="og:title" content="{{ page.title }}" />
+  {% else %}
+  <meta property="og:title" content="the frontendian" />
   {% endif %}
 
   <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
@@ -34,6 +44,29 @@
   {% endif %}
 
   <meta property="og:type" content="website" />
+
+  <!-- Twitter Metadata -->
+  {% if page.title %}
+  <meta name="twitter:title" content="{{ page.title }}" />
+  {% else %}
+  <meta name="twitter:title" content="the frontendian" />
+  {% endif %}
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site:id" content="thefrontendian" />
+  <meta name="twitter:creator:id" content="andryanmiller" />
+
+  {% if page.excerpt %}
+  <meta name="twitter:description" content="{{ page.excerpt | remove: '<p>' | remove: '</p>' }}" />
+  {% else %}
+  <meta name="twitter:description" content="A little blog about building web applications." />
+  {% endif %}
+
+  {% if page.ogShareImage %}
+  <meta name="twitter:image" content="{{ site.url }}{{ page.ogShareImage }}" />
+  {% else %}
+  <meta name="twitter:image" content="{{ site.url }}/public/img/generic_share.png" />
+  {% endif %}
 
   <!-- Syntax Highlighting -->
 
