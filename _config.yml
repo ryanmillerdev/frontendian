@@ -1,8 +1,35 @@
-title: The Frontendian
+title: the frontendian
 email: ryan@frontendian.co
-description: A little blog about building web applications.
+description:
+  en: A little blog about building web applications. Posts arrive weekly on performance, security, accessibility, tooling, and more.
+  pt_BR: Um blog simples sobre construção de aplicações web. Posts toda semana sobre performance, segurança, acessibilidade, ferramentas e mais.
 url: "https://frontendian.co"
 permalink: /:categories/:title
 markdown: kramdown
 plugins:
   - jekyll-feed
+  - jekyll-polyglot
+languages: ["en", "pt_BR"]
+default_lang: "en"
+exclude_from_localization: ["javascript", "images", "css"]
+parallel_localization: true
+
+# Language Vars
+latest_posts:
+  en: Latest Posts
+  pt_BR: Últimos Posts
+recent_posts:
+  en: Recent Posts
+  pt_BR: Posts Recentes
+
+buttons:
+  keep_reading:
+    en: Keep Reading
+    pt_BR: Continuar Lendo
+
+footer:
+  made_with_and_by:
+    en: Made with ☕ in Seattle by
+    pt_BR: Feito com ☕ em Seattle por
+  translated_by:
+    pt_BR: Traduzido para o Português Brasileiro por <a href="http://heitorfig.com/" target="_blank">Heitor Figueiredo</a>.
