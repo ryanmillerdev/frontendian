@@ -9,12 +9,8 @@ layout: base
   </a>
   {{ latestPost.excerpt }}
 </article>
-<div style="text-align: center">
-  <a href="{{ latestPost.url }}">
-    <button class="ma-4">Keep Reading</button>
-  </a>
-</div>
-<h4>Recent Posts</h4>
+<a href="{{ latestPost.url }}">Read More</a>
+<h4 class="mt-8">Recent Posts</h4>
 {% assign recentPosts = site.posts | slice:1,5 %}
 {% for post in recentPosts %}
 <article>
@@ -23,4 +19,5 @@ layout: base
   </a>
   {{ post.excerpt }}
 </article>
+<a href="{{ post.url }}">Read More</a>
 {% endfor %}
