@@ -152,6 +152,30 @@
       max-width: 600px;
     }
 
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .footer-link {
+      display: inline-block;
+      margin: 1rem;
+      width: 20px;
+      height: 20px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .footer-link-mailing-list {
+      background-image: url(/public/svg/icons/newsletter.svg)
+    }
+
+    .footer-link-rss {
+      background-image: url(/public/svg/icons/rss.svg)
+    }
+
     @media screen and (max-width: 640px) {
       footer, header, main {
         padding: 0 20px;
@@ -197,10 +221,6 @@
       }
     }
 
-    footer .footer-links {
-      flex-basis: 200px;
-    }
-
     /* Headers */
 
     h1, h2, h3, h4, h5, h6 {
@@ -211,20 +231,22 @@
       font-weight: bold;
       line-height: 1.25;
     }
-
-    h1::after ,
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -2rem;
-      left: 0;
+    
+    hr {
+      border: 0;
+      margin: 4rem auto;
+      padding: 0;
       width: 200px;
       height: 2px;
       background-color: #F7D869;
     }
 
     h1.align-middle ,
-    h2.align-middle {
+    h2.align-middle ,
+    h3.align-middle ,
+    h4.align-middle ,
+    h5.align-middle ,
+    h6.align-middle {
       text-align: center;
     }
 
@@ -250,6 +272,14 @@
 
     h4 {
       font-size: 3.5rem;
+    }
+
+    h5 {
+      font-size: 3rem;
+    }
+
+    h6 {
+      font-size: 2.5rem;
     }
 
     /* Buttons */
@@ -312,6 +342,10 @@
         <p>A little blog about building web applications. Posts arrive weekly on performance, security, accessibility, tooling, and more.</p>
         <p>Made with ☕ in Seattle by <a href="https://twitter.com/andryanmiller" target="_blank">Ryan Miller</a>.</p>
       </div>
+    </div>
+    <div class="footer-links">
+      <a href="/feed.xml" class="footer-link footer-link-rss"></a>
+      <a href="mailing-list" class="footer-link footer-link-mailing-list"></a>
     </div>
   </footer>
 

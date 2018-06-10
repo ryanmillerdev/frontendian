@@ -3,10 +3,18 @@ layout: base
 ---
 <article>
   <figure>
-    <img width="100%" style="max-width: 180px; max-height: 180px;" src="{{ page.hero }}" />
+    <img width="180px" height="180px" src="{{ page.hero }}" />
   </figure>
-  <h1 class="mb-4 align-middle">{{ page.title }}</h1>
-  <p style="font-size: 3rem; text-align: center; font-family: Cardo;"><i><time datetime="{{ page.date }}">{{ page.date | date: "%B %-d, %Y" }}</time></i></p>
+  <h1 class="mb-2 align-middle">{{ page.title }}</h1>
+  <h6 class="mb-4 align-middle">{{ page.subtitle }}</h6>
+  <hr />
+  <p style="font-size: 3rem; text-align: center; font-family: Cardo;"><i><time datetime="{{ page.date }}">
+    {% if page.dateString %}
+      {{ page.dateString }}
+    {% else %}
+      {{ page.date | date: "%B %-d, %Y" }}
+    {% endif %}
+  </time></i></p>
   <p style="font-family: Cardo; margin-bottom: 4rem; text-align: center;">~</p>
   {{ content }}
 </article>

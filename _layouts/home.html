@@ -15,7 +15,7 @@ layout: base
   </a>
 </div>
 <h4>Recent Posts</h4>
-{% assign recentPosts = site.posts | slice:1 %}
+{% assign recentPosts = site.posts | slice:1,5 %}
 {% for post in recentPosts %}
 <article>
   <a href="{{ post.url }}">
