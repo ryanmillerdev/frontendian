@@ -52,7 +52,7 @@
   <meta name="twitter:title" content="the frontendian" />
   {% endif %}
 
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:site:id" content="thefrontendian" />
   <meta name="twitter:creator:id" content="andryanmiller" />
 
@@ -153,6 +153,34 @@
       max-width: 600px;
     }
 
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .footer-link {
+      display: inline-block;
+      margin: 1rem;
+      width: 20px;
+      height: 20px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .footer-link-mailing-list {
+      background-image: url(/public/svg/icons/newsletter.svg)
+    }
+
+    .footer-link-rss {
+      background-image: url(/public/svg/icons/rss.svg)
+    }
+
+    .footer-link-twitter {
+      background-image: url(/public/svg/icons/twitter.svg)
+    }
+
     @media screen and (max-width: 640px) {
       footer, header, main {
         padding: 0 20px;
@@ -198,10 +226,6 @@
       }
     }
 
-    footer .footer-links {
-      flex-basis: 200px;
-    }
-
     /* Headers */
 
     h1, h2, h3, h4, h5, h6 {
@@ -212,20 +236,22 @@
       font-weight: bold;
       line-height: 1.25;
     }
-
-    h1::after ,
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -2rem;
-      left: 0;
+    
+    hr {
+      border: 0;
+      margin: 4rem auto;
+      padding: 0;
       width: 200px;
       height: 2px;
       background-color: #F7D869;
     }
 
     h1.align-middle ,
-    h2.align-middle {
+    h2.align-middle ,
+    h3.align-middle ,
+    h4.align-middle ,
+    h5.align-middle ,
+    h6.align-middle {
       text-align: center;
     }
 
@@ -253,6 +279,14 @@
       font-size: 3.5rem;
     }
 
+    h5 {
+      font-size: 3rem;
+    }
+
+    h6 {
+      font-size: 2.5rem;
+    }
+
     /* Buttons */
 
     button {
@@ -274,10 +308,12 @@
     .mb-1 { margin-bottom: 1rem !important; }
     .mb-2 { margin-bottom: 2rem !important; }
     .mb-3 { margin-bottom: 3rem !important; }
+    .mt-4 { margin-top: 4rem !important; }
     .ma-4 { margin: 4rem !important; }
     .mb-4 { margin-bottom: 4rem !important; }
     .mb-5 { margin-bottom: 5rem !important; }
     .mb-6 { margin-bottom: 6rem !important; }
+    .mt-8 { margin-top: 8rem !important; }
 
     /* Disqus */
     #disqus_thread {
@@ -317,6 +353,11 @@
         <p>{{ site.footer.translated_by[site.active_lang] }}</p>
         {% endif %}
       </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://twitter.com/thefrontendian" class="footer-link footer-link-twitter" target="_blank"></a>
+      <a href="/feed.xml" class="footer-link footer-link-rss"></a>
+      <a href="/mailing-list" class="footer-link footer-link-mailing-list"></a>
     </div>
   </footer>
 

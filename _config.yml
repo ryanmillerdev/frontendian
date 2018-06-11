@@ -15,9 +15,9 @@ exclude_from_localization: ["javascript", "images", "css"]
 parallel_localization: true
 
 # Language Vars
-latest_posts:
-  en: Latest Posts
-  pt_BR: Últimos Posts
+latest_post:
+  en: Latest Post
+  pt_BR: Último Post
 recent_posts:
   en: Recent Posts
   pt_BR: Posts Recentes
@@ -26,6 +26,9 @@ buttons:
   keep_reading:
     en: Keep Reading
     pt_BR: Continuar Lendo
+  read_more:
+    en: Read More
+    pt_BR: Leia Mais
 
 footer:
   made_with_and_by:
