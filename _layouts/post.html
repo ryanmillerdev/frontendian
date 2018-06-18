@@ -14,8 +14,28 @@ layout: base
     {% else %}
       {{ page.date | date: "%B %-d, %Y" }}
     {% endif %}
+    {% if page.isTranslation %}
+      <span> | </span><span>{{ page.translatedTo }} </span><a href="{{ page.translatorLink }}" target="_blank">{{ page.translatorName }}</a>
+    {% endif %} 
   </time></i></p>
+  {% if page.translations %}
+  <div class="translation-icons">
+    <a class="ma-1" href="/{{ page.permalink }}">
+      <img src="/public/svg/icons/en-us.svg" width="20" />
+    </a>
+    {% for language in page.translations %}
+    <a class="ma-1" href="/{{ page.permalink }}-{{language}}">
+        <img src="/public/svg/icons/{{language}}.svg" width="20" />
+      </a>
+    {% endfor %}
+  </div>
+  {% elsif page.isTranslation %}
+  <p style="font-family: Cardo; margin-bottom: 4rem; text-align: center;">
+    <a href="{{page.translatedOriginal}}">Original</a>
+  </p>
+  {% else %}
   <p style="font-family: Cardo; margin-bottom: 4rem; text-align: center;">~</p>
+  {% endif %}
   {{ content }}
 </article>
 {% if page.comments %}
