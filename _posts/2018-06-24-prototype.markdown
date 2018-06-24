@@ -36,7 +36,7 @@ class Collie extends Dog {}
 const lassie = new Collie()
 lassie.woof() // => 'Woof!'</code></pre>
 
-JavaScript breaks from pack in its usage of _prototypal inheritance_. One way to understand prototypal inheritance is that it is simply inheritance without classes. Objects inherit from living, breathing objects, not schematics. This allows for a dynamic taxonomy of objects, which you might say pairs appropriately with another notorious JavaScript feature, dynamic typing. Below you'll find the same example given above, save it now uses prototypal inheritance:
+JavaScript breaks from trend in its usage of _prototypal inheritance_. One way to understand prototypal inheritance is that it is simply inheritance without classes. Objects inherit from living, breathing objects, not schematics. This allows for a dynamic taxonomy of objects, which you might say pairs appropriately with another notorious JavaScript feature: dynamic typing. Below you'll find the same example given above, save it now uses prototypal inheritance:
 
 <pre><code>const Dog = function () {}
 
@@ -114,7 +114,7 @@ Brunhilda.sayHi() => "Hi!"</code></pre>
 
 ### Object.setPrototypeOf
 
-We mentioned above that JavaScript's inheritance mechanism is highly dynamic, and we can demonstrate that here via `Object.setPrototypeOf`. Be advised, using `Object.setPrototypeOf` is something that be done with great care, and you should likely take gander through the [warnings on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf). An example of the method's usage:
+We mentioned above that JavaScript's inheritance mechanism is highly dynamic, and we can demonstrate that here via `Object.setPrototypeOf`. Be advised, using `Object.setPrototypeOf` is something that should be done with great care, and you should likely take gander through the [warnings on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf). An example of the method's usage:
 
 <pre><code>const Creature = Object.create({
   yowl: function () { console.log('Yowl!' )}
