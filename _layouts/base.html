@@ -266,11 +266,11 @@
       margin: 6rem 0;
     }
 
-    h2 {
+    h2, h2 code {
       font-size: 5rem;
     }
 
-    h3 {
+    h3, h3 code {
       font-size: 4rem;
     }
 
@@ -284,6 +284,22 @@
 
     h6 {
       font-size: 2.5rem;
+    }
+
+    blockquote {
+      position: relative;
+      margin: 0;
+      padding: 5rem;
+    }
+
+    blockquote::before {
+      content: '';
+      position: absolute;
+      top: 5rem;
+      left: 0;
+      width: 0.5rem;
+      height: 5rem;
+      background-color: #F7D869;
     }
 
     /* Buttons */
