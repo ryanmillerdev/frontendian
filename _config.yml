@@ -4,5 +4,6 @@ description: A little blog about building web applications.
 url: "https://frontendian.co"
 permalink: /:categories/:title
 markdown: kramdown
+include: ['_translations']
 plugins:
   - jekyll-feed
