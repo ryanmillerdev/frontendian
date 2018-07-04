@@ -3,10 +3,8 @@ layout: post
 title:  "The Prototype"
 date:   2018-06-17 08:00:00 -0700
 dateString: "June 17th, 2018"
-categories: ['technologies', 'javascript']
 hero: /public/svg/prototype/beaker.svg
 ogShareImage: /public/img/prototype_og_image.png
-permalink: /prototype
 comments: true
 syntaxHighlighting: ['javascript']
 excerpt: <p>Amongst JavaScript arcana, the prototype stands alone for its ability to baffle developers and invite misuse. With the introduction of classes in ECMAScript 6, you might be tempted to dismiss the JavaScript prototype once and for all–but as this post seeks to demonstrate, it is, and will remain, a fundamental aspect of the JavaScript language that you can ignore only at your own peril.</p>

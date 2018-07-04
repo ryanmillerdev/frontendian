@@ -4,10 +4,8 @@ title:  "The Tectonics of the Web"
 subtitle: "A Tour of Three Standards Organizations"
 date: 2018-06-10 06:00:00 -0700
 dateString: "June 10th, 2018"
-categories: standards
 hero: /public/svg/the-tectonics-of-the-web/hero.svg
 ogShareImage: /public/img/tectonics_og_image.png
-permalink: /the-tectonics-of-the-web
 comments: true
 ---
 It's a common refrain amongst frontend developers: "The web changes so quickly, I can barely keep pace!" New frameworks come into vogue, tooling trends come and go, and browsers implement (and deprecate) scores of features, all in the span of weeks and months. It can feel like you're building on quicksand.
