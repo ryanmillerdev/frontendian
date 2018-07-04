@@ -11,5 +11,6 @@ deploy:
   bucket: "frontendian-production"
   local_dir: _site
   skip_cleanup: true
+  acl: public_read
   on:
     branch: master
