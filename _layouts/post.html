@@ -15,6 +15,19 @@ layout: base
       {{ page.date | date: "%B %-d, %Y" }}
     {% endif %}
   </time></i></p>
+  {% if page.translations and page.isTranslation != true %}
+  <div class="translation-icons">
+    {% for language in page.translations %}
+    {% if language == 'en_US' %}
+      <a class="ma-1" href="{{ page.permalink }}">
+    {% else %}
+      <a class="ma-1" href="{{ language }}{{ page.permalink }}">
+    {% endif %}
+        <img src="/public/svg/icons/lang-{{language}}.svg" width="20" />
+      </a>
+    {% endfor %}
+  </div>
+  {% endif %}
   <p style="font-family: Cardo; margin-bottom: 4rem; text-align: center;">~</p>
   {{ content }}
 </article>

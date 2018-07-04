@@ -2,13 +2,15 @@
 layout: post
 title:  "CORS"
 date:   2018-06-03 08:00:00 -0700
-categories: security
 hero: /public/svg/sailor-outline.svg
 ogShareImage: /public/img/cors_og_image.png
 permalink: /cors
 lang: pt_BR
 comments: true
 syntaxHighlighting: ['http']
+footer:
+  translated_by:
+    pt_BR: Traduzido para o Português Brasileiro por <a href="http://heitorfig.com/" target="_blank">Heitor Figueiredo</a>.
 ---
 CORS (Compartilhamento de Recursos de Origem Cruzada) é um assunto um tanto quanto obscuro para muitos desenvolvedores web. Como lendas de míticos monstros marinhos, todos desenvolvedor tem um história para contar sobre quando o CORS se apoderou de seus requests, levando-os para profundezas inexoráveis, e nunca mais foram vistos.
 
