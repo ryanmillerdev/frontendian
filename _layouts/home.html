@@ -3,14 +3,15 @@ layout: base
 ---
 {% assign latestPost = site.posts | first %}
 <article>
-  <h4>Latest Post</h4>
+  <h4>{{ site.latest_post[site.active_lang] }}</h4>
   <a href="{{ latestPost.url }}">
     <h1>{{ latestPost.title }}</h1>
   </a>
   {{ latestPost.excerpt }}
 </article>
-<a href="{{ latestPost.url }}">Read More</a>
-<h4 class="mt-8">Recent Posts</h4>
+<a href="{{ latestPost.url }}">{{ site.buttons.read_more[site.active_lang] }}</a>
+
+<h4 class="mt-8">{{ site.recent_posts[site.active_lang] }}</h4>
 {% assign recentPosts = site.posts | slice:1,5 %}
 {% for post in recentPosts %}
 <article>
@@ -19,5 +20,5 @@ layout: base
   </a>
   {{ post.excerpt }}
 </article>
-<a href="{{ post.url }}">Read More</a>
+<a href="{{ post.url }}">{{ site.buttons.read_more[site.active_lang] }}</a>
 {% endfor %}
