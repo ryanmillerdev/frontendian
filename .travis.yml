@@ -10,5 +10,6 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: "frontendian-production"
   local_dir: _site
+  skip_cleanup: true
   on:
     branch: master
