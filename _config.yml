@@ -2,8 +2,7 @@ title: The Frontendian
 email: ryan@frontendian.co
 description: A little blog about building web applications.
 url: "https://frontendian.co"
-permalink: /:categories/:title
 markdown: kramdown
-permalink: /:categories/:title/index:output_ext
+permalink: /:categories/:title
 plugins:
   - jekyll-feed
