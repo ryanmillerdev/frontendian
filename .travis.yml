@@ -2,7 +2,7 @@ language: ruby
 cache: bundler
 install:
   - bundle install
-build:
+script:
   - jekyll build
 deploy:
   provider: s3
