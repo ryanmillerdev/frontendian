@@ -3,6 +3,6 @@ email: ryan@frontendian.co
 description: A little blog about building web applications.
 url: "https://frontendian.co"
 markdown: kramdown
-permalink: /:categories/:title/
+permalink: /:categories/:title
 plugins:
   - jekyll-feed
