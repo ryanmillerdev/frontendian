@@ -7,7 +7,7 @@ hero: /public/svg/sailor-outline.svg
 ogShareImage: /public/img/cors_og_image.png
 comments: true
 syntaxHighlighting: ['http']
-translations: ['pt_BR']
+translations: ['pt_BR', 'fr_FR']
 ---
 CORS (Cross-Origin Resource Sharing) is subject tinged with dread for many web developers. Like tales of a mythical sea beast, every developer has a story to tell about the day CORS seized upon one of their web requests, dragging it down into the inexorable depths, never to be seen again. 
 
