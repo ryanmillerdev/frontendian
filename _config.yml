@@ -9,7 +9,7 @@ permalink: /:categories/:title
 plugins:
   - jekyll-feed
   - jekyll-polyglot
-languages: ["en", "pt_BR"]
+languages: ["en", "pt_BR", "fr_FR"]
 default_lang: "en"
 exclude_from_localization: ["javascript", "images", "css"]
 parallel_localization: true
