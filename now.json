@@ -1,0 +1,8 @@
+{
+  "type": "npm",
+  "files": [
+    "_site",
+    "package.json",
+    "server.js"
+  ]
+}

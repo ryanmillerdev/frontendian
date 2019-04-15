@@ -1,0 +1,24 @@
+{
+  "name": "frontendian",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/andryanmiller/frontendian.svg?branch=master)](https://travis-ci.org/andryanmiller/frontendian)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andRyanMiller/frontendian.git"
+  },
+  "author": "Ryan Miller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andRyanMiller/frontendian/issues"
+  },
+  "homepage": "https://github.com/andRyanMiller/frontendian#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-subdomain": "^1.0.5"
+  }
+}
