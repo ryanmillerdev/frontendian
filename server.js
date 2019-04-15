@@ -28,8 +28,6 @@ app.use(Express.static('_site', {
 
 app.get(/\/$/, (req, res) => res.redirect(req.url.substring(0, req.url.length - 1)))
 
-
-
 // Liftoff
 
 app.listen(80)

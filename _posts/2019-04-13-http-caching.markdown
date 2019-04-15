@@ -25,7 +25,7 @@ Thankfully, HTTP offers a powerful solution: _caching_. This post is going to ex
 
 In its simplest form, a _cache_ simply allows a system to hold onto a resource if it knows that said resource isn't likely to change over a certain period of time. Before that time period expires a resource is said to be _fresh_, and afterwards it is said to be _stale_. These two terms are central to an understanding of caching.
 
-The perfect cache would allow a client, such as a browser, to hold onto a resource for as long as possible before discarding it for a newer version when appropriate. Easily stated, but one the ["two hard problems"](https://martinfowler.com/bliki/TwoHardThings.html){:target="_blank"} in computer science.
+The perfect cache would allow a client, such as a browser, to hold onto a resource for as long as possible before discarding it for a newer version when appropriate. Easily stated, but one of the ["two hard problems"](https://martinfowler.com/bliki/TwoHardThings.html){:target="_blank"} in computer science.
 
 In order for a cache to function you need a way to convey how long a resource will be fresh, which is an impossible task for a server given that it cannot predict with absolute certainty when (if ever) a resource will be updated. That's knowledge only you, as the developer, possess. And so it's up to you to guide the cache.
 
@@ -35,7 +35,7 @@ How to accomplish that? HTTP offers two primary means, the first of which we'll 
   <img src="/public/svg/wizard_skull.svg" width="100%" style="max-width: 18rem; margin:4rem 0;"/>
 </figure>
 
-## `Expires` & The Origins of HTTP Caching
+## `Expires` & the Origins of HTTP Caching
 
 `Expires` was introduced in [HTTP/1.0](https://tools.ietf.org/html/rfc1945#section-10.7){:target="_blank"}, and, alongside `Pragma`, `Last-Modified`, and `If-Modified-Since`, comprised HTTP's first caching system. It's the simplest of the HTTP caching headers at your disposal, indicating the date at which a given resource will become stale:
 
@@ -51,11 +51,11 @@ Once the date specified by `Expires` is in the past, the browser will attempt to
   <img src="/public/svg/wizard_telescope.svg" width="100%" style="max-width: 25rem; margin:4rem 0;"/>
 </figure>
 
-### Revalidation With `Last-Modified` & `If-Modified-Since`
+### Revalidation with `Last-Modified` & `If-Modified-Since`
 
 Remember how we mentioned the perfect cache would only fetch a new resource when it was 100% certain one was available? One way to achieve that is to allow browsers to interrogate servers as per whether such a resource is indeed available. But how can a browser indicate which version of a resource it currently has?
 
-Enter `If-Modified-Since`. Extending our example above, imagine if a browser wanted to fetch `image.jpeg` on April 15th, a day after the date specified by the `Expires` header. You'll notice that in the code snippet above contains `Last-Modified` header, which signals that last time the server is aware that the image was updated.
+Enter `If-Modified-Since`. Extending our example above, imagine if a browser wanted to fetch `image.jpeg` on April 15th, a day after the date specified by the `Expires` header. You'll notice that the code snippet above contains `Last-Modified` header, which indicates the last time the server believes that the image was updated.
 
 Given that the browser already has `image.jpeg` in its cache, it can tell the server that it already has a copy of the image that was last modified on April 12th:
 
@@ -72,7 +72,7 @@ Last-Modified: Fri, 12 Apr 2019 08:00:00 GMT</code></pre>
 
 Upon receipt of such a response, the browser is free to release its cached copy. This result is win/win for both the server and client: the server ensures the most up-to-date version of a resourse is in use, and the client doesn't need to redownload the image.
 
-### Ensuring Freshness With `Pragma`
+### Ensuring Freshness with `Pragma`
 
 While HTTP/1.0 lacked any way for servers to instruct clients not to cache particular resources, there did exist a somewhat ungainly way for clients to request that servers not serve them a cached resource, called `Pragma`:
 
@@ -85,11 +85,11 @@ The utility of `Pragma` (which was originally designed as something of a [grab-b
   <img src="/public/svg/wizard_quill_and_scroll.svg" width="100%" style="max-width: 25rem; margin:4rem 0;"/>
 </figure>
 
-## `cache-control` & The Evolution of HTTP Caching
+## `cache-control` & the Evolution of HTTP Caching
 
-The limitations of `Expires` led to introduction of `cache-control` in HTTP/1.1, which greatly augmented the flexibility with which developers could cache resources. Instead of relying stricly on dates, `cache-control` accepts a number of directives, a couple of which we'll discuss now, with the remainder being folded into discussions of revalidation, security, and more.
+The limitations of `Expires` led to the introduction of `cache-control` in HTTP/1.1, which greatly augmented the flexibility with which developers could cache resources. Instead of relying stricly on dates, `cache-control` accepts a number of directives, a couple of which we'll discuss now, with the remainder being folded into discussions of revalidation, security, and more.
 
-### Enter The `max-age` Directive
+### Enter the `max-age` Directive
 
 Think of the `max-age` directive as a simpler alternative to `Expires`. Should you wish to specify that a resource expires in a single day, you could respond with a `cache-control` header crafted as follows:
 
@@ -108,11 +108,13 @@ Cache-Control: max-age=86400</code></pre>
 
 Not only can be it difficult to map the `Expires` date to your local timezone, many server implementations simply bungled the date format, which resulted in confusion. `max-age`, being a simple integer representing seconds since the response was generated, is far easier to grok.
 
-### Revalidation With `Etag` & `If-None-Match`
+The longest duration that the `max-age` directive can support is a year, which satisfies most use-cases. But if you communicate to a browser that a certain resource will never change, you can also leverage the newer `immutable` directive, which accomplishes exactly that. Be forewarned that its adoption isn't yet wholly consistent across browsers, so its worthwhile to throw in `max-age` alongside it. 
+
+### Revalidation with `Etag` & `If-None-Match`
 
 HTTP/1.1 also introduced a new revalidation strategy to complement `If-Modified-Since`, centered around what are termed "entity tags".
 
-You can think of entity tags as a way for server's to uniquely identify a version of a resource with an alphanumeric ID, supplied in the `ETag` response header:
+You can think of entity tags as a way for servers to uniquely identify a version of a resource with an alphanumeric ID, supplied in the `ETag` response header:
 
 <pre><code>GET https://www.example.com/image.jpeg HTTP/1.1
 Status: 200
@@ -124,7 +126,7 @@ If a client wants to tell the server that it has a specific version of a resourc
 <pre><code>GET https://www.example.com/image.jpeg HTTP/1.1
 If-None-Match: abc</code></pre>
 
-Should the latest version of the resource does not match the entity tag "abc", the server will respond with the new version. Otherwise, it will respond with a `304 Not Modified` response.
+Should the latest version of the resource not match the entity tag "abc", the server will respond with the new version. Otherwise, it will respond with a `304 Not Modified` response.
 
 <pre><code>GET https://www.example.com/image.jpeg HTTP/1.1
 Status: 304
@@ -151,13 +153,13 @@ To mitigate this, HTTP/1.1 introduced the `public` and `private` `cache-control`
 
 These directives are still useful. If you share a PC with multiple people, and your browser shares a cache between them all, then there's still the potential that it might share downloaded resources with them. If a resource specifies the `private` directive, then the browser should do its best to ensure only you, the user that downloaded it, can reuse it.
 
-### Supressing Caching With `no-cache` & `no-store`
+### Supressing Caching with `no-cache` & `no-store`
 
-HTTP/1.1 corrected the insufficiency of HTTP/1.0's `Pragma` header and supplied web developers with a means of wholesale disabling caching.
+HTTP/1.1 corrected the insufficiency of HTTP/1.0's `Pragma` header and supplied web developers with a means by which caching could be completely disabled.
 
 The first directive, `no-cache`, forces a cache to revalidate a resource before reuse. Unlike `must-revalidate`, `no-cache` means that the browser much revalidate in all cases, not just when the resource has become stale.
 
-The second directive, `no-store`, is the hammer: it signals that the resource must not enter the cache under any circumstances.
+The second directive, `no-store`, is the hammer: it signals that the resource must not enter the cache under any circumstances. 
 
 ### Specifying Request-Specifc Caching Constraints
 
@@ -181,21 +183,21 @@ Cache-Control: max-stale=3600
 
 The `no-transform` directive tells intermediate caches that the client doesn't want any version of the resource that said caches might have modified. This is applicable in cases where a cache like [Cloudflare](https://www.cloudflare.com/){:target="_blank"} might have applied `gzip` compression.
 
-And lastly, the `only-if-cached` directive tells intermediate caches that the client only wants a cached response, and that they shouldn't otherwise bother with talking to the server for a fresh copy. If the cache is unable specify the request, it should return a `504 Gateway Timeout` response.
+And lastly, the `only-if-cached` directive tells intermediate caches that the client only wants a cached response, and that they shouldn't otherwise bother with talking to the server for a fresh copy. If the cache is unable to satisfy the request, it should return a `504 Gateway Timeout` response.
 
 <figure>
   <img src="/public/svg/wizard_dragon.svg" width="100%" style="max-width: 25rem; margin:4rem 0;"/>
 </figure>
 
-## `Vary` And Server-Negotiated Responses
+## `Vary` and Server-Negotiated Responses
 
 Our final topic dives into how browsers actually identify resources, and how server negotiation plays into things.
 
-At a high-level, a browser cache really looks at the URL and the method, though since virtually all cacheable requests are GET requests the practical reality is that the URL is generally sufficient for browsers to identify resources.
+At a high-level, a browser cache really just looks at the URL and the method, though since virtually all cacheable requests are GET requests the practical reality is that the URL is generally sufficient for browsers to identify resources.
 
 This starts to break down when we realize that two responses served for the same URL could differ based on the user agent, or leverage different compression strategies.
 
-To that end, caches pay close attention to which headers a server uses to negotiate which an appropriate response, which is conveyed to the client via the `Vary` header. For example, imagine we made the following request for an image:
+To that end, caches pay close attention to which headers a server uses to negotiate an appropriate response, which is conveyed to the client via the `Vary` header. For example, imagine we made the following request for an image:
 
 <pre><code>GET https://www.example.com/image.jpeg HTTP/1.1
 Accept-Encoding: gzip
@@ -222,7 +224,11 @@ Caching is a remarkably powerful way to augment the performance of your applicat
 
 ## Resources
 
-[MDN - Expires](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires){:target="_blank"}
-[MDN - Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control){:target="_blank"}
-[Google Developer - HTTP Caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching){:target="_blank"}
-[Mark Nottingham - Web Caching Tutorial](https://www.mnot.net/cache_docs/){:target="_blank"}
+[MDN - Expires](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires){:target="_blank"}  
+[MDN - Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control){:target="_blank"}  
+[Google Developer - HTTP Caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching){:target="_blank"}  
+[Mark Nottingham - Web Caching Tutorial](https://www.mnot.net/cache_docs/){:target="_blank"}  
+
+## Illustrations
+
+Thank you again to [Dmitry Venevtsev](https://creativemarket.com/WINS){:target="_blank"} for his wonderful work on the illustrations for this post!
