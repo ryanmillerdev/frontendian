@@ -9,7 +9,7 @@ permalink: /http-caching
 comments: true
 syntaxHighlighting: ['http']
 excerpt: >
-  <p>Of all the bytes scurrying around of the internet at any given moment, the vast majority of them are static, or are unlikely to change over time. Images, videos, and fonts all fall into this category, and a great many of the modern internet's performance woes can be attributed to these resources.</p>
+  <p>Of all the bytes scurrying around on the internet at any given moment, the vast majority of them are static, or are unlikely to change over time. Images, videos, and fonts all fall into this category, and a great many of the modern internet's performance woes can be attributed to these resources.</p>
 ---
 Of all the bytes scurrying around on the internet at any given moment, the [vast majority of them](https://httparchive.org/reports/page-weight?start=2014_03_01&end=latest&view=list){:target="_blank"} are _static_, or unlikely to change over time. Images, videos, and fonts all fall into this category, and a great many of the modern internet's performance woes can be attributed to these resources. 
 
