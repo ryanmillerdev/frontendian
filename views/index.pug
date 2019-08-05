@@ -1,0 +1,16 @@
+extends base
+
+block main
+  each post, index in posts.filter(post => post.language === 'en')
+    if index === 0
+      h4 Latest Post
+      article
+        h1=post.title
+        p=post.excerpt
+        a(href=post.slug) Read More
+      h4.mt-8 Recent Posts
+    else 
+      article
+        h2=post.title
+        p=post.excerpt
+        a(href=post.slug) Read More

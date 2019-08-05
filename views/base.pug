@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+    //- Google Analytics
+    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-44427723-6")
+    script
+      | window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}; gtag('js', new Date()); gtag('config', 'UA-44427723-6');
+    
+    //- Generic Properties
+    title=title
+    meta(name="description" content=description)
+    link(rel="shortcut icon" href="/img/favicon-32.png")
+
+    //- Open Graph Properties 
+    meta(property="og:title" content=title)
+    meta(property="og:description" content=description)
+    meta(property="og:image" content=image)
+    meta(property="og:type" content="website")
+
+    //- Twitter Properties
+    meta(name="twitter:title" content=title)
+    meta(name="twitter:description" content=description)
+    meta(name="twitter:image" content=image)
+    meta(name="twitter:card" content="summary_large_image")
+    meta(name="twitter:site:id" content="thefrontendian")
+    meta(name="twitter:creator:id" content="andryanmiller")
+    
+    //- Styles
+    block styles
+    link(rel="stylesheet" href="/css/styles.css")
+  body
+    header
+      a(href="/")
+        h3 the frontendian
+    main
+      block main
+    footer
+      .footer-divider
+        svg(version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewbox='0 0 16 16' xml:space='preserve' width='16' height='16')
+          g.nc-icon-wrapper(fill='#111111')
+            line(x1='10.5' y1='1.5' x2='5.5' y2='14.5' fill='none' stroke='#111111' stroke-linecap='round' stroke-linejoin='round' data-cap='butt' data-color='color-2')
+            polyline(points='3.5 4.5 0.5 7.5 3.5 10.5' fill='none' stroke='#111111' stroke-linecap='round' stroke-linejoin='round' data-cap='butt')
+            polyline(points='12.5 4.5 15.5 7.5 12.5 10.5' fill='none' stroke='#111111' stroke-linecap='round' stroke-linejoin='round' data-cap='butt')
+      .footer-body
+        .footer-description
+          p A little blog about building web applications.
+          p
+            | Made with ☕ in Seattle by 
+            a(href='https://twitter.com/andryanmiller' target='_blank') Ryan Miller
+            | .
+      .footer-links
+        a.footer-link.footer-link-twitter(href='https://twitter.com/thefrontendian' target='_blank')
+        a.footer-link.footer-link-rss(href='/feed.xml')
+        a.footer-link.footer-link-mailing-list(href='/mailing-list')
+    block scripts
+

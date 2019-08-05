@@ -1,0 +1,6 @@
+{
+  "redirects": {
+    "/fr_FR/cors": "/cors-fr",
+    "/pt_BR/cors": "/cors-pt"
+  }
+}
