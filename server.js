@@ -1,33 +1,105 @@
-const Express = require('express')
-const subdomain = require('express-subdomain')
+const Fs = require('fs')
+const Hapi = require('@hapi/hapi');
+const Path = require('path')
 
-// Express App
+// Post Handling
 
-const app = Express()
+const loadPosts = () => Fs.readdirSync('./posts')
+  .map(filename => Fs.readFileSync(`./posts/${filename}`, 'utf8'))
+  .map(require('./utilities/parse-post'))
 
-// i18n Subdomains Router
+const posts = loadPosts()
+  .filter(post => post.published_at !== undefined) // Remove unpublished posts
+  .filter(post => Date.now() > (new Date(post.published_at).getTime())) // Remove posts to be published in the future
+  .sort((a, b) => new Date(b.published_at) - new Date(a.published_at)) // Sort by date published
 
-app.use(subdomain('fr', Express.static('_site/fr_FR', {
-  extensions: ['html']
-})))
+// Redirect Routes
 
-app.get('/fr_FR/:path', (req, res) => {
-  console.log(req)
-  res.redirect(`${req.protocol}://fr.${req.hostname}/${req.params.path}`)
-})
+const mountRedirects = (server) => {
+  const { redirects } = JSON.parse(Fs.readFileSync('./redirects.json', 'utf8'))
 
-app.use(subdomain('pt', Express.static('_site/pr_BR', {
-  extensions: ['html']
-})))
+  Object.entries(redirects).forEach(([from, to]) => {
+    server.route({
+      method: 'GET',
+      path: from,
+      handler: (_, h) => h.redirect(to).permanent()
+    })
+  })
+}
 
-// Routers
+// Post Routes
 
-app.use(Express.static('_site', {
-  extensions: ['html']
-}))
+const mountPostRoutes = (server) => {
+  posts.forEach(post => {
+    server.route({
+      method: 'GET',
+      path: `/${post.slug}`,
+      handler: (_, h) => h.view('post', { 
+        title: post.title,
+        description: post.excerpt,
+        image: post.og_image,
+        post 
+      })
+    })
+  })
+}
 
-app.get(/\/$/, (req, res) => res.redirect(req.url.substring(0, req.url.length - 1)))
+// Server Initialization
 
-// Liftoff
+const bootstrap = async () => {
+  const server = Hapi.server({
+    port: process.env.PORT || 8040,
+    routes: {
+      files: { relativeTo: Path.join(__dirname, 'static') }
+    }
+  })
 
-app.listen(80)
+  await server.register(require('@hapi/inert'))
+  await server.register(require('@hapi/vision'))
+
+  server.views({
+    engines: { pug: require('pug') },
+    relativeTo: __dirname,
+    path: 'views',
+    context: {
+      title: 'the frontendian',
+      description: 'A little blog about building web applications.',
+      image: '/public/img/generic_share.png'
+    }
+  })
+
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, h) => h.view('index', { posts })
+  })
+  
+  server.route({
+    method: 'GET',
+    path: '/feed.xml',
+    handler: (request, h) => h.view('rss', { posts }).type('application/atom+xml')
+  })
+
+  server.route({
+    method: 'GET',
+    path: '/mailing-list',
+    handler: (request, h) => h.view('mailing-list')
+  })
+
+  // Fs.readdirSync('./routes').forEach(r => server.route(require(`./routes/${r}`)))
+
+  server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+      directory: { path: '.', index: false }
+    }
+  })
+
+  mountRedirects(server)
+  mountPostRoutes(server)
+
+  await server.start()
+}
+
+bootstrap()

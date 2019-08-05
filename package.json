@@ -1,24 +1,31 @@
 {
-  "name": "frontendian",
-  "version": "1.0.0",
-  "description": "[![Build Status](https://travis-ci.org/andryanmiller/frontendian.svg?branch=master)](https://travis-ci.org/andryanmiller/frontendian)",
+  "name": "@frontendian/web",
+  "version": "0.1.0",
+  "description": "The Frontendian web app.",
   "main": "server.js",
+  "engines": {
+    "node": "10.14.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andRyanMiller/frontendian.git"
+    "url": "git+https://github.com/frontendian/web.git"
   },
-  "author": "Ryan Miller",
+  "author": "Ryan Miller (@andryanmiller)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/andRyanMiller/frontendian/issues"
+    "url": "https://github.com/frontendian/web/issues"
   },
-  "homepage": "https://github.com/andRyanMiller/frontendian#readme",
+  "homepage": "https://github.com/frontendian/web#readme",
   "dependencies": {
-    "express": "^4.16.3",
-    "express-subdomain": "^1.0.5"
+    "@hapi/hapi": "18.3.1",
+    "@hapi/inert": "5.2.1",
+    "@hapi/vision": "5.5.2",
+    "js-yaml": "3.13.1",
+    "marked": "0.7.0",
+    "moment": "2.24.0",
+    "pug": "2.0.3"
   }
 }

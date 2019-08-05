@@ -1,0 +1,262 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Karla, Arial, Helvetica, sans-serif;
+  font-size: 6px;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.75;
+}
+
+a {
+  color: #4057DF;
+  font-weight: bold;
+  font-style: normal;
+  text-decoration: none;
+}
+
+code {
+  font-family: Inconsolata, 'Courier New', Courier, monospace;
+}
+
+a, address, div, p, pre, code {
+  font-size: 3rem;
+}
+
+figure {
+  margin: 8rem 0;
+  text-align: center;
+}
+
+pre {
+  margin: 6rem 0;
+}
+
+figcaption {
+  display: inline-block;
+  margin: 5rem 0 0 0;
+  max-width: 50rem;
+  font-size: 2rem;
+}
+
+figcaption a {
+  font-size: 2rem;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 2rem 0;
+  word-break: break-word;
+}
+
+ol, ul {
+  padding: 0 3rem;
+  list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAALGPC/xhBQAAACtJREFUGBlj/A8EDEQAJiLUgJWwwBQ6RjyAMVHo/SsUwHyiTRwKChmpHo4APj0LDfz+9xwAAAAASUVORK5CYII=);
+}
+
+li {
+  margin: 0 0 2rem 0;
+  font-size: 3rem;
+}
+
+footer, header, main {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.footer-link {
+  display: inline-block;
+  margin: 1rem;
+  width: 20px;
+  height: 20px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.footer-link-mailing-list {
+  background-image: url(/svg/icons/newsletter.svg)
+}
+
+.footer-link-rss {
+  background-image: url(/svg/icons/rss.svg)
+}
+
+.footer-link-twitter {
+  background-image: url(/svg/icons/twitter.svg)
+}
+
+@media screen and (max-width: 640px) {
+  footer, header, main {
+    padding: 0 20px;
+  }
+}
+
+header {
+  margin-bottom: 10rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+header a {
+  color: #333;
+  text-decoration: none;
+}
+
+footer {
+  margin-bottom: 30rem;
+  min-height: 30rem;
+}
+
+footer .footer-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20rem;
+}
+
+footer .footer-description {
+  text-align: center;
+}
+
+.footer-body {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 640px) {
+  .footer-body {
+    margin-bottom: 10rem;
+    flex-direction: column;
+  }
+}
+
+/* Headers */
+
+h1, h2, h3, h4, h5, h6 {
+  position: relative;
+  margin: 4rem 0;
+  color: #333;
+  font-family: Cardo, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+hr {
+  border: 0;
+  margin: 4rem auto;
+  padding: 0;
+  width: 200px;
+  height: 2px;
+  background-color: #F7D869;
+}
+
+h1.align-middle ,
+h2.align-middle ,
+h3.align-middle ,
+h4.align-middle ,
+h5.align-middle ,
+h6.align-middle {
+  text-align: center;
+}
+
+h1.align-middle::after,
+h2.align-middle::after {
+  left: 50%;
+  margin-left: -100px;
+}
+
+
+h1 {
+  font-size: 6rem;
+  margin: 6rem 0;
+}
+
+h2, h2 code {
+  font-size: 5rem;
+}
+
+h3, h3 code {
+  font-size: 4rem;
+}
+
+h4 {
+  font-size: 3.5rem;
+}
+
+h5 {
+  font-size: 3rem;
+}
+
+h6 {
+  font-size: 2.5rem;
+}
+
+blockquote {
+  position: relative;
+  margin: 0;
+  padding: 5rem;
+}
+
+blockquote::before {
+  content: '';
+  position: absolute;
+  top: 5rem;
+  left: 0;
+  width: 0.5rem;
+  height: 5rem;
+  background-color: #F7D869;
+}
+
+/* Buttons */
+
+button {
+  border: 2px solid #F7D869;
+  padding: 2rem 3rem;
+  background-color: #F7D869;
+  border-radius: 5px;
+  color: #333;
+  cursor: pointer;
+  font-family: Karla, Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utilities */
+.mb-0 { margin-bottom: 0 !important; }
+.ma-1 { margin: 1rem !important; }
+.mb-1 { margin-bottom: 1rem !important; }
+.mb-2 { margin-bottom: 2rem !important; }
+.mb-3 { margin-bottom: 3rem !important; }
+.mt-4 { margin-top: 4rem !important; }
+.ma-4 { margin: 4rem !important; }
+.mb-4 { margin-bottom: 4rem !important; }
+.mb-5 { margin-bottom: 5rem !important; }
+.mb-6 { margin-bottom: 6rem !important; }
+.mt-8 { margin-top: 8rem !important; }
+/* Disqus */
+#disqus_thread {
+  margin: 4rem 0 0 0;
+}
+/* HighlightJS */
+.hljs {
+  background-color: #FAFAFA;
+  padding: 6rem;
+}
+
+.translation-icons {
+  margin: 3rem;
+  display: flex;
+  justify-content: center;
+}
