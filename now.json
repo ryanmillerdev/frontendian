@@ -1,0 +1,12 @@
+{
+  "type": "npm",
+  "files": [
+    "posts",
+    "static",
+    "utilities",
+    "views",
+    "package.json",
+    "redirects.json",
+    "server.js"
+  ]
+}

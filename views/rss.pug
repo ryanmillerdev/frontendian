@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+feed(xmlns="http://www.w3.org/2005/Atom")
+  link(rel="self" href="https://frontendian.co/feed.xml" type="application/atom+xml")
+  id https://frontendian.co/
+  title(type="html") the frontendian
+  subtitle A little blog about building web applications.
+  updated=`${(new Date(posts[0].published_at)).toISOString()}`
+  each post in posts.filter(post => post.language === 'en')
+    entry
+      id=`https://frontendian.co/${post.slug}`
+      title(type="html")=post.title
+      published=`${(new Date(post.published_at)).toISOString()}`
+      updated=`${(new Date(post.published_at)).toISOString()}`
+      content(type="html")=post.body
+      author
+        name=post.author_name
+

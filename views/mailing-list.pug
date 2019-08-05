@@ -1,0 +1,30 @@
+extends base
+
+block styles
+  link(href='https://cdn-images.mailchimp.com/embedcode/classic-10_7.css' rel='stylesheet' type='text/css')
+  style(type='text/css').
+    #mc_embed_signup { background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+ 
+block main
+  #mc_embed_signup
+    form#mc-embedded-subscribe-form.validate(action='https://frontendian.us18.list-manage.com/subscribe/post?u=944a22fa33a7ff861810c3a3e&id=bb8b6be60b' method='post' name='mc-embedded-subscribe-form' target='_blank' novalidate='')
+      #mc_embed_signup_scroll
+        h2(style='text-align:center')
+          | By subscribing, we&apos;ll send you one (1) email every month alerting you to new posts.
+        .indicates-required
+          span.asterisk *
+          |  indicates required
+        .mc-field-group
+          label(for='mce-EMAIL')
+            | Email Address  
+            span.asterisk *
+          input#mce-EMAIL.required.email(type='email' value='' name='EMAIL')
+        #mce-responses.clear
+          #mce-error-response.response(style='display:none')
+          #mce-success-response.response(style='display:none')
+        // real people should not fill this in and expect good things - do not remove this or risk form bot signups
+        div(style='position: absolute; left: -5000px;' aria-hidden='true')
+          input(type='text' name='b_944a22fa33a7ff861810c3a3e_bb8b6be60b' tabindex='-1' value='')
+        .clear
+          input#mc-embedded-subscribe.button(type='submit' value='Subscribe' name='subscribe')
+
