@@ -1,0 +1,7 @@
+#cloud-config
+
+runcmd:  
+  - ssh-agent -s
+  - git clone git@github.com:andryanmiller/frontendian.git /opt/apps/frontendian
+  - docker build --rm -f "Dockerfile" -t frontendian:latest /opt/apps/frontendian
+  - docker run --rm -d -p 80:8080/tcp frontendian:latest

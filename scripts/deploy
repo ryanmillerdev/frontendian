@@ -1,0 +1,10 @@
+#!/bin/bash
+
+doctl compute droplet create frontendian-${RANDOM:0:6} \
+  --enable-monitoring \
+  --image 50547429 \
+  --region sfo2 \
+  --size s-1vcpu-2gb \
+  --ssh-keys 25141952 \
+  --user-data-file ./scripts/cloud-config \
+  --wait
