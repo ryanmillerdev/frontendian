@@ -86,7 +86,11 @@ const bootstrap = async () => {
     handler: (request, h) => h.view('mailing-list')
   })
 
-  // Fs.readdirSync('./routes').forEach(r => server.route(require(`./routes/${r}`)))
+  server.route({
+    method: 'GET',
+    path: '/{param}/',
+    handler: ({ path }, h) => h.redirect(path.replace(/\/$/g, '')).permanent()
+  })
 
   server.route({
     method: 'GET',
