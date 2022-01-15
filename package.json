@@ -24,7 +24,7 @@
     "@hapi/inert": "5.2.1",
     "@hapi/vision": "5.5.2",
     "js-yaml": "3.13.1",
-    "marked": "0.7.0",
+    "marked": "4.0.10",
     "moment": "2.24.0",
     "pug": "2.0.3"
   }
